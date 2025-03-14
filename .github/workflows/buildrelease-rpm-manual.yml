@@ -1,0 +1,32 @@
+name: Build Release RPM package - Manual Trigger
+run-name: Build Release RPM package - Manual Trigger
+on:
+  workflow_dispatch:
+
+jobs:
+  buildrpm:
+    runs-on: fedora-latest
+    steps:
+      - run: sudo dnf install -y rpm-build rpmdevtools
+      - uses: actions/checkout@v4
+        with:
+          fetch-tags: true
+          fetch-depth: 0
+      - run: git tag
+      - name: Set up RPM build environment
+        run: |
+          rpmdev-setuptree
+          cp tenstorrent-tools.spec ~/rpmbuild/SPECS/
+      - name: Build RPM package
+        run: |
+          rpmbuild -bb ~/rpmbuild/SPECS/tenstorrent-tools.spec
+      - name: Move RPM packages
+        run: mkdir -p artifacts && cp ~/rpmbuild/RPMS/noarch/tenstorrent-tools-*.rpm artifacts/
+      - name: Set environment variable for rpm filename
+        id: rpm_filename
+        run: echo "RPM_FILENAME=$(basename artifacts/*.rpm)" >> $GITHUB_ENV
+      - name: Upload RPM package
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.RPM_FILENAME }}
+          path: artifacts/*.rpm
