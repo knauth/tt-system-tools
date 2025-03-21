@@ -11,8 +11,8 @@ cp tenstorrent-hugepages.service ~/rpmbuild/SOURCES/
 
 cp tenstorrent-tools.spec ~/rpmbuild/SPECS/
 
-# This is a stupid hack to work around the fact that rpmbuild can't handle backslashes in filenames.
-ln -sf ~/rpmbuild/SOURCES/"dev-hugepages\x2d1G.mount" ~/rpmbuild/SOURCES/tt-hugepages-mount
+# Copy the file to a version without backslashes for RPM to handle properly
+cp ~/rpmbuild/SOURCES/"dev-hugepages\x2d1G.mount" ~/rpmbuild/SOURCES/tt-hugepages-mount
 
 # Build the RPM
 rpmbuild -bb --noclean ~/rpmbuild/SPECS/tenstorrent-tools.spec

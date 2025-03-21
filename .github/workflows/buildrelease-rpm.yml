@@ -20,7 +20,7 @@ jobs:
           cp tenstorrent-tools.spec ~/rpmbuild/SPECS/
           cp dev-hugepages\\x2d1G.mount hugepages-setup.sh tenstorrent-hugepages.service \
             ~/rpmbuild/SOURCES  
-          ln -sf ~/rpmbuild/SOURCES/"dev-hugepages\x2d1G.mount" ~/rpmbuild/SOURCES/tt-hugepages-mount
+          cp ~/rpmbuild/SOURCES/"dev-hugepages\x2d1G.mount" ~/rpmbuild/SOURCES/tt-hugepages-mount
           echo "%_unitdir /usr/lib/systemd/system" > ~/.rpmmacros
           version=$(echo ${{ github.ref_name }} | sed 's/^v//')
           sed -i "s/Version:.*/Version:        ${version}/" ~/rpmbuild/SPECS/tenstorrent-tools.spec
