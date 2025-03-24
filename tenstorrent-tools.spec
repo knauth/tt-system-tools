@@ -34,14 +34,14 @@ mkdir -p %{buildroot}%{_sbindir}
 
 install -m 755 %{SOURCE0} %{buildroot}/opt/tenstorrent/bin/
 install -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/
-install -m 644 %{SOURCE2} %{buildroot}%{_unitdir}/dev-hugepages-1G.mount
+install -m 644 %{SOURCE2} %{buildroot}%{_unitdir}/dev-hugepages\\x2d1G.mount
 
 # Create post-install script
 cat > %{buildroot}%{_sbindir}/tenstorrent-tools.post <<EOF
 #!/bin/bash
 systemctl daemon-reload
 systemctl enable tenstorrent-hugepages.service
-systemctl enable dev-hugepages-1G.mount
+systemctl enable dev-hugepages\\x2d1G.mount
 EOF
 chmod 755 %{buildroot}%{_sbindir}/tenstorrent-tools.post
 
@@ -51,7 +51,7 @@ chmod 755 %{buildroot}%{_sbindir}/tenstorrent-tools.post
 %files
 /opt/tenstorrent/bin/hugepages-setup.sh
 %{_unitdir}/tenstorrent-hugepages.service
-%{_unitdir}/dev-hugepages-1G.mount
+%{_unitdir}/dev-hugepages\x2d1G.mount
 %{_sbindir}/tenstorrent-tools.post
 
 %changelog
