@@ -24,7 +24,7 @@ jobs:
           version=$(echo ${{ github.ref_name }} | sed 's/^v//')
           sed -i "s/Version:.*/Version:        ${version}/" ~/rpmbuild/SPECS/tenstorrent-tools.spec
       - name: Upload RPM artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: rpm-package
           path: ~/rpmbuild/RPMS/noarch/tenstorrent-tools-*.rpm
@@ -42,7 +42,7 @@ jobs:
       - run: |
           gbp buildpackage --git-ignore-branch --git-upstream-tag='v%(version)s'
       - name: Upload DEB artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: deb-package
           path: ../*.deb
@@ -65,13 +65,13 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
       
       - name: Download RPM artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: rpm-package
           path: ./packages/rpm
       
       - name: Download DEB artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: deb-package
           path: ./packages/deb
