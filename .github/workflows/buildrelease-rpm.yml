@@ -2,7 +2,7 @@ name: Build Release RPM package
 run-name: Build Release RPM package
 on:
   push:
-    tags: [ 'v*' ]
+    tags: [ '*v*' ]
 
 jobs:
   buildrpm:
