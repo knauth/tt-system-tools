@@ -51,7 +51,7 @@ chmod 755 %{buildroot}%{_sbindir}/tenstorrent-tools.post
 %files
 /opt/tenstorrent/bin/hugepages-setup.sh
 %{_unitdir}/tenstorrent-hugepages.service
-%{_unitdir}/dev-hugepages\\x2d1G.mount
+%{_unitdir}/dev-hugepages\x2d1G.mount
 %{_sbindir}/tenstorrent-tools.post
 
 %changelog
