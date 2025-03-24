@@ -42,12 +42,12 @@ jobs:
           fetch-tags: true
           fetch-depth: 0
       - run: |
-          gbp buildpackage --git-ignore-branch --git-upstream-tag='upstream/v%(version)s' --git-export-dir=/
+          gbp buildpackage --git-ignore-branch --git-upstream-tag='upstream/v%(version)s' --git-export-dir=/home
       - name: Upload DEB artifact
         uses: actions/upload-artifact@v4
         with:
           name: deb-package
-          path: "/*.deb"
+          path: "/home/*.deb"
           retention-days: 1
 
   create_release:
