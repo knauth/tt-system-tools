@@ -16,8 +16,8 @@ jobs:
           fetch-depth: 0
       - run: git tag
       - run: |
-        VERSION=$(echo ${{ github.ref_name }} | sed 's/^v//')
-        gbp buildpackage --git-ignore-branch --git-upstream-version=$VERSION --git-upstream-tag='v%(version)s'
+          VERSION=$(echo ${{ github.ref_name }} | sed 's/^v//')
+          gbp buildpackage --git-ignore-branch --git-upstream-version=$VERSION --git-upstream-tag='v%(version)s'
       - name: release
         uses: actions/create-release@v1
         id: create_release
